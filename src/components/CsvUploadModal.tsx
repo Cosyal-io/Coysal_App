@@ -82,7 +82,6 @@ export function CsvUploadModal({ onClose, onResponse }: CsvUploadModalProps) {
     onClose(); // Close the modal after submission    
 }
 
-
     return (
         <div className="flex justify-center items-center h-full">
             <div className="bg-white p-6 rounded-md shadow-md w-full max-w-md">
@@ -91,7 +90,7 @@ export function CsvUploadModal({ onClose, onResponse }: CsvUploadModalProps) {
                         name="csvFile"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>CSV File</FormLabel>
+                                <FormLabel>PDF file</FormLabel>
                                 <FormControl>
                                     <input type="file" onChange={handleFileUpload} />
                                 </FormControl>
