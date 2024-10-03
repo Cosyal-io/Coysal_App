@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { Button } from "s/components/ui/button"; // Import Button from Shadcn UI
 import { useState } from "react";
-import Header from "src/components/Header";
 import Footer from "src/components/Footer";
 import CsvUploadModal from "src/components/CsvUploadModal"; // Import the CsvUploadModal component
 import { CreateNft } from "src/components/createNft";
@@ -112,7 +111,6 @@ const authenticateUser = async () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <Header /> {/* Include Header */}
       <main className="flex flex-col items-center gap-6 p-4">
         <CsvUploadModal 
           isOpen={isModalOpen} 

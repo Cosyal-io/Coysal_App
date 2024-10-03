@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Header from "src/components/Header";
 import "./globals.css";
 import { Toaster } from "s/components/ui/sonner"; // Import Toaster for notifications
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster /> {/* Include Toaster for notifications */}
+        <Header />
         {children}
       </body>
     </html>
