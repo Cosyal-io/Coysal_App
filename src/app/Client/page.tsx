@@ -78,7 +78,7 @@ const Home = () => {
 
 const login = async () => {
   if (!web3auth) {
-    uiConsole("web3auth not initialized yet");
+    toast("web3auth not initialized yet");
     return;
   }
   const web3authProvider = await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
@@ -89,11 +89,11 @@ const login = async () => {
 
 const authenticateUser = async () => {
   if (!web3auth) {
-    uiConsole("web3auth not initialized yet");
+    toast("web3auth not initialized yet");
     return;
   }
   const idToken = await web3auth.authenticateUser();
-  uiConsole(idToken);
+  toast(idToken.idToken);
 };
 
 
@@ -103,7 +103,7 @@ const authenticateUser = async () => {
   
   const handleCreateNft  = async () => {
     if (jsonResponse) {
-      await CreateNft(jsonResponse.jsonData.name, jsonResponse.jsonData.uri);
+     // await CreateNft(jsonResponse.jsonData.name, jsonResponse.jsonData.uri);
     } else {
       toast.error("No JSON response available");
     }

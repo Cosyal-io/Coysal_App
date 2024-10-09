@@ -7,11 +7,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { pinata } from "src/utils/pinata_upload";
 
 
-  export const config = {
-    api: {
-      bodyParser: false,
-    },
-  };
+  // export const config = {
+  //   api: {
+  //     bodyParser: false,
+  //   },
+  // };
   
   export async function POST(request: NextRequest) {
     try {

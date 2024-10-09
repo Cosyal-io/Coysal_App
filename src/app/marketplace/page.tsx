@@ -63,12 +63,16 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  TooltipProvider
 } from "s/components/ui/tooltip"
 
 export const description =
   "An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions."
 
-export function Dashboard() {
+
+  // @ts-ignore
+
+export default function Marketplace() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -80,6 +84,7 @@ export function Dashboard() {
             <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
             <span className="sr-only">Acme Inc</span>
           </Link>
+          <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -92,6 +97,8 @@ export function Dashboard() {
             </TooltipTrigger>
             <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -104,6 +111,8 @@ export function Dashboard() {
             </TooltipTrigger>
             <TooltipContent side="right">Orders</TooltipContent>
           </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -116,6 +125,8 @@ export function Dashboard() {
             </TooltipTrigger>
             <TooltipContent side="right">Products</TooltipContent>
           </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -128,6 +139,8 @@ export function Dashboard() {
             </TooltipTrigger>
             <TooltipContent side="right">Customers</TooltipContent>
           </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -139,10 +152,11 @@ export function Dashboard() {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Analytics</TooltipContent>
-          </Tooltip>
+          </Tooltip></TooltipProvider>
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
-          <Tooltip>
+          <TooltipProvider>
+            <Tooltip>
             <TooltipTrigger asChild>
               <Link
                 href="#"
@@ -154,6 +168,7 @@ export function Dashboard() {
             </TooltipTrigger>
             <TooltipContent side="right">Settings</TooltipContent>
           </Tooltip>
+          </TooltipProvider>
         </nav>
       </aside>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">

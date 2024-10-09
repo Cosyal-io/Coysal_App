@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "s/components/ui/button"; 
 import Link from "next/link";
 import {Menubar, MenubarMenu, MenubarTrigger} from "s/components/ui/menubar";
+import { Client } from "xrpl";
 
 const Header = () =>  {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false); // State to manage modal visibility
@@ -15,21 +16,30 @@ const Header = () =>  {
         </div>
         <nav>
         <Menubar>
-          <MenubarMenu>
-                  <MenubarTrigger>Marketplace</MenubarTrigger>   
+          {/* <MenubarMenu>
+                  <MenubarTrigger>
+                    <Link href="/marketplace">
+                    Marketplace
+                    </Link>
+                    
+                    </MenubarTrigger>   
           <MenubarTrigger>
-                  <MenubarTrigger>Investment Dashboard</MenubarTrigger>
+                  <MenubarTrigger>
+                    <Link href="/Client">
+                    Onboard NFT (for admin only)
+                    </Link>
+                    </MenubarTrigger>
              </MenubarTrigger>
-          </MenubarMenu>
+          </MenubarMenu> */}
           </Menubar>
         </nav>
         <nav>
-          <Button 
+          {/* <Button 
             onClick={() => setIsSignUpModalOpen(true)} 
             className="border border-black bg-black text-white hover:bg-gray-900 transition rounded-md px-3 py-1 text-sm"
           >
             SignUp Wallet
-          </Button>
+          </Button> */}
         </nav>
       </header>
   );

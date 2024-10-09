@@ -8,7 +8,7 @@ import { pinata } from "src/utils/pinata_upload"; // Ensure pinata is imported
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect } from "react";
-
+import { Badge } from "s/components/ui/badge";
 const formSchema = z.object({
     projectName: z.string().min(2, {
       message: "Project name should be atleast of 2 characters.",
@@ -42,12 +42,25 @@ export function CsvUploadModal({ onClose, onResponse }: CsvUploadModalProps) {
         resolver: zodResolver(formSchema),
       });
       
-      
+
+
     const { handleSubmit, register } = useForm();
     const [csvFile, setCsvFile] = useState<File | null>(null);
     const [projectName, setProjectName] = useState<string>("");
+    const [address, setAddress] = useState<string[]>();
 
 
+
+    const AddressBadges = ({ addresses }: { addresses: string[] }) => {
+        return (
+            <>
+            {addresses.map((address, index) => (
+                <Badge key={index}>{address}</Badge>
+            ))}
+            </>
+        );
+    };
+    
 
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCsvFile(event.target.files ? event.target.files[0] : null);
@@ -110,12 +123,26 @@ export function CsvUploadModal({ onClose, onResponse }: CsvUploadModalProps) {
                             </FormItem>
                         )}
                     />
-                    <Button 
+
+                    <FormField
+                        name="AddressesToParticipate"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Addressses to Participate</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Enter the addresses" {...field} value={address} onChange={(e) => setAddress(e.target.value.split(','))} />
+                                </FormControl>
+                                {address && <AddressBadges addresses={address}/> } 
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    {/* <Button 
                         type="submit" 
                         className="mt-4 bg-black text-white hover:bg-gray-800 transition"
                     >
                         Deposit CSV to JSON
-                    </Button>
+                    </Button> */}
                 </Form>
             </div>
         </div>

@@ -1,12 +1,21 @@
-
+import {HoverCard, HoverCardTrigger, HoverCardContent} from "s/components/ui/hover-card"
+import { Button } from "s/components/ui/button";
 const Footer = () => (
+    <>
     <footer className="flex justify-between p-4">
-      <div>© 2024 Coysal Project</div> {/* Company Name */}
-      <div>
-        <a href="/about">About</a>
-        <a href="/contact" className="ml-4">Contact</a>
-      </div>
-    </footer>
+      {/* <HoverCard>
+      <HoverCardTrigger asChild> */}
+      <Button variant="link">2024 Coysal Project</Button> {/* Company Name */}
+      {/* </HoverCardTrigger> */}
+      {/* <HoverCardContent>
+        <p>
+          Coysal is a platform that allows investors to invest in projects that have a positive impact on society and the environment.
+        </p>
+      </HoverCardContent>
+
+      </HoverCard> */}
+    </footer> 
+    </>
   );
-  
+
   export default Footer;

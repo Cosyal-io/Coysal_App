@@ -6,7 +6,7 @@ import { configDotenv } from "dotenv";
 import {randomInt} from "crypto"
 configDotenv()
 
-export const xrplWallet = new XrplWalletWrapper({})
+//export const xrplWallet = new XrplWalletWrapper({})
 
 export const CreateNft = async ( NftNames: string, NftUri: string, AccountOwner: string ) => {
   const [nftName, setNftName] = useState("");
@@ -29,32 +29,32 @@ export const CreateNft = async ( NftNames: string, NftUri: string, AccountOwner:
             Flags: 0,
             URI: convertStringToHex(nftUri),
             Issuer: process.env.ISSUER_ADDRESS!,
+            
         }
-        const result = await xrplWallet.mintTokenNFT(transaction);
+      //  const result = await xrplWallet.mintTokenNFT(transaction);
         toast.success("NFT created successfully");
         }
-    catch (error) {
-        toast.error("Error creating NFT");
+    catch(e) {
+        toast.error("Error creating NFT" + e);
     }
 
 };
 
 export const CreateNFTOffer = async (inputParams: NFTInputParameters) => {
+// try {
+//    const transaction_params: NFTOffer = {
+//     amount: inputParams.certificate_equivalent_value,
+//     flags: 0,
+//     nft_offer_index: randomInt(1000).toString(),
+//     owner: inputParams.owner_address
+//    }
 
-try {
-   const transaction_params: NFTOffer = {
-    amount: inputParams.certificate_equivalent_value,
-    flags: 0,
-    nft_offer_index: randomInt(1000).toString(),
-    owner: inputParams.owner_address
-   }
 
+// }
+// except(e) {
+//     console.error(e)
 
-}
-except(e) {
-    console.error(e)
-
-}
+// }
 
 
 
