@@ -1,7 +1,11 @@
-import {HoverCard, HoverCardTrigger, HoverCardContent} from "s/components/ui/hover-card"
-import { Button } from "s/components/ui/button";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from 's/components/ui/hover-card';
+import { Button } from 's/components/ui/button';
 const Footer = () => (
-    <>
+  <>
     <footer className="flex justify-between p-4">
       {/* <HoverCard>
       <HoverCardTrigger asChild> */}
@@ -14,8 +18,8 @@ const Footer = () => (
       </HoverCardContent>
 
       </HoverCard> */}
-    </footer> 
-    </>
-  );
+    </footer>
+  </>
+);
 
-  export default Footer;
+export default Footer;

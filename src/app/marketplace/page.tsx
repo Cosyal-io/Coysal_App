@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   File,
   Home,
@@ -14,9 +14,9 @@ import {
   Settings,
   ShoppingCart,
   Users2,
-} from "lucide-react"
+} from 'lucide-react';
 
-import { Badge } from "s/components/ui/badge"
+import { Badge } from 's/components/ui/badge';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,8 +24,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "s/components/ui/breadcrumb"
-import { Button } from "s/components/ui/button"
+} from 's/components/ui/breadcrumb';
+import { Button } from 's/components/ui/button';
 import {
   Card,
   CardContent,
@@ -33,7 +33,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "s/components/ui/card"
+} from 's/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -42,9 +42,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "s/components/ui/dropdown-menu"
-import { Input } from "s/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "s/components/ui/sheet"
+} from 's/components/ui/dropdown-menu';
+import { Input } from 's/components/ui/input';
+import { Sheet, SheetContent, SheetTrigger } from 's/components/ui/sheet';
 import {
   Table,
   TableBody,
@@ -52,25 +52,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "s/components/ui/table"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "s/components/ui/tabs"
+} from 's/components/ui/table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 's/components/ui/tabs';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  TooltipProvider
-} from "s/components/ui/tooltip"
+  TooltipProvider,
+} from 's/components/ui/tooltip';
 
 export const description =
-  "An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions."
+  'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
 
-
-  // @ts-ignore
+// @ts-ignore
 
 export default function Marketplace() {
   return (
@@ -85,89 +79,90 @@ export default function Marketplace() {
             <span className="sr-only">Acme Inc</span>
           </Link>
           <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
-          </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Home className="h-5 w-5" />
+                  <span className="sr-only">Dashboard</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Dashboard</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
           <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="sr-only">Orders</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Orders</TooltipContent>
-          </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="sr-only">Orders</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Orders</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
           <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Package className="h-5 w-5" />
-                <span className="sr-only">Products</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Products</TooltipContent>
-          </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Package className="h-5 w-5" />
+                  <span className="sr-only">Products</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Products</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
           <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Users2 className="h-5 w-5" />
-                <span className="sr-only">Customers</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Customers</TooltipContent>
-          </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Users2 className="h-5 w-5" />
+                  <span className="sr-only">Customers</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Customers</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
           <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <LineChart className="h-5 w-5" />
-                <span className="sr-only">Analytics</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Analytics</TooltipContent>
-          </Tooltip></TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <LineChart className="h-5 w-5" />
+                  <span className="sr-only">Analytics</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Analytics</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
             <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Settings</TooltipContent>
-          </Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="#"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Settings className="h-5 w-5" />
+                  <span className="sr-only">Settings</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Settings</TooltipContent>
+            </Tooltip>
           </TooltipProvider>
         </nav>
       </aside>
@@ -634,7 +629,7 @@ export default function Marketplace() {
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
+                    Showing <strong>1-10</strong> of <strong>32</strong>{' '}
                     products
                   </div>
                 </CardFooter>
@@ -644,5 +639,5 @@ export default function Marketplace() {
         </main>
       </div>
     </div>
-  )
+  );
 }
