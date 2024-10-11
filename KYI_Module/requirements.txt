@@ -1,7 +1,8 @@
 langchain
-streamlit
 PyPDF2 
 matplotlib
 langchain_community
 openai
 python-dotenv
+fastapi
+supabase

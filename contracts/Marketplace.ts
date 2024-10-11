@@ -24,7 +24,7 @@ import { Database } from 'src/utils/database_types';
 
 
 
-interface ImpactNFTGenerationProps {
+export interface ImpactNFTGenerationProps {
   quantity: number;
   pdf_storage_reference: string;
   corresponding_nfts: NFToken[];
@@ -44,10 +44,6 @@ export class NFTMarketplace {
     this.admin_address = admin_address;
     this.Client = client;
   } 
-
-
-
-  
 
   /**
    * approves  innvestor wallets for the investments for the given NFT's
@@ -102,7 +98,6 @@ export class NFTMarketplace {
 
   async generateNFTCerts(inputtParams: ImpactNFTGenerationProps) {
     try {
-   
       const {
         quantity,
         pdf_storage_reference,
@@ -111,7 +106,6 @@ export class NFTMarketplace {
       } = inputtParams;
       // fetching the pdf uri from the pinata ipfs
       const pdf_uri_json = await fetchURL(pdf_storage_reference);
-
       const {
         pdf_uri,
         project_name,
