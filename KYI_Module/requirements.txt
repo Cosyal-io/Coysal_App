@@ -6,3 +6,6 @@ openai
 python-dotenv
 fastapi
 supabase
+surya-ocr
+supabase
+pyjwt
