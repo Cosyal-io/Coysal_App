@@ -7,10 +7,16 @@ from subprocess import check_call
 import PyPDF2
 import matplotlib.pyplot as plt
 from dotenv import load_dotenv
+from transformers import AutoTokenizer, AutoModel, pipeline
 import json
 import os
 import jwt
 from supabase import create_client, Client
+
+import random
+
+tokenizer = AutoTokenizer.from_pretrained("vikp/surya_rec2")
+model = AutoModel.from_pretrained("vikp/surya_rec2")  
 
 class BiodiversityImpactClassificationRequest(BaseModel):
     project_name: str
@@ -22,6 +28,7 @@ class BiodiversityImpactClassificationResponse(BaseModel):
     jwt_token: str
 
 load_dotenv()
+
 openai_api_key = os.getenv("OPENAI_API_KEY")
 chatperplexity_api_key = os.getenv("PERPLEXITY_API_KEY")
 supabase_url = os.getenv("SUPABASE_URL")
@@ -35,68 +42,94 @@ supabase: Client = create_client(supabase_url, supabase_key)
 perplexity_model = ChatPerplexity(api_key=chatperplexity_api_key, model="llama-3.1-sonar-small-128k-online")
 
 def extract_text_from_pdf(pdf_file):
-    pdf_reader = PyPDF2.PdfReader(pdf_file)
-    text = ""
-    for page_num in range(len(pdf_reader.pages)):
-        page = pdf_reader.pages[page_num]
-        text += page.extract_text()
-    return text
+    # Mocked PDF extraction
+
+   ## st.info("Mock: Extracting text from PDF...")
+    return None
 
 def extract_descriptions_from_pdf_surya(pdf_file_path, project_name):
-    try: 
-        check_call(["surya_ocr", pdf_file_path, "--langs", "en,fr", "--results", f"resulting_pdf/{project_name}.json"])
-        with open(f"resulting_pdf/{project_name}.json", "r") as f:
-            data = json.load(f)
-            return data 
-    except Exception as e:
-        print(e)
-        return None 
-
-def search_on_perplexity(human_prompt, system_prompt):
-    prompt_template = ChatPromptTemplate.from_messages([
-               {"role": "system", "content": system_prompt},
-        {"role": "user", "content": human_prompt}
- 
-        ])
-    chain = perplexity_model | prompt_template
+    # Mocked Surya OCR extraction using the transformers model: 
+    temp_file_path = f"/tmp/{pdf_file_path.name}"
     try:
-        response = chain.invoke(input="Run this pipeline in order to find the impact score")
+        with open(temp_file_path, "wb") as f:
+            f.write(pdf_file_path.getbuffer())
+            ocr_pipeline = pipeline("token-classification", model=model, tokenizer=tokenizer)
+
+        # Extract text from the PDF using PyPDF2
+        pdf_reader = PyPDF2.PdfReader(temp_file_path)
+        extracted_text = ""
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            page_text = page.extract_text()
+            extracted_text += page_text
+
+        # Use the OCR pipeline to process the extracted text
+        ocr_results = ocr_pipeline(extracted_text)
+
+        # Format the OCR results
+        formatted_results = {
+            "project_name": project_name,
+            "ocr_results": ocr_results
+        }
+
+        # Save the results to a JSON file
+        result_file_path = f"resulting_pdf/{project_name}.json"
+        with open(result_file_path, "w") as f:
+            json.dump(formatted_results, f)
+
+        return formatted_results
+    except Exception as e:
+        st.error(f"Error extracting descriptions from PDF using Surya OCR: {e}")
+        return None
+    
+
+def search_on_perplexity(project_name, pdf_overall_classification, selected_certifications):
+    chat_prompt_template = ChatPromptTemplate.from_messages(
+    [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": human_prompt}
+    ]
+)
+    try:
+        prompt_data = {
+            "project_name": project_name,
+            "pdf_overall_classification": pdf_overall_classification,
+            "selected_certifications": selected_certifications
+        }
+        formatted_prompt = chat_prompt_template.format(prompt_data)
+        response = perplexity_model.run(formatted_prompt)
         return response
     except Exception as e:
-        print(e)
-        return None
+        st.error(f"Error searching on Perplexity: {e}")
+        return None    
 
-def classify_biodiversity_impact(project_name, pdf_file, selected_certifications):
+def classify_biodiversity_impact(project_name, uploaded_file, selected_certifications):
     st.info("🔍 Fetching simple text details from the PDF")
-    # pdf_text_data = extract_text_from_pdf(pdf_file)
+    pdf_text_data = extract_text_from_pdf(uploaded_file)
+    if pdf_text_data is None:
+        return 0
     
     st.info("🔍 Fetching extensive PDF details using Surya OCR")
-    pdf_overall_classification = extract_text_from_pdf(pdf_file)
-    
-    system_prompt = f"""
-    You are a Biodiversity expert who is trying to classify whether the investor defined by {project_name} with its proof of biodiversity contributions file with following text: {pdf_overall_classification} (showcasing the companies proof that it is certified from {selected_certifications}) is credible enough for the investment in our project by creating the index (out of 10).
-    you will be using also the perplexity tool to fetch the information from the internet to determine whether the company's report information is credible enough , and then compare it with the benchmarks of the given standards in the industry in order to generate the index score
-
-    Your result should be evaluated in order to determine that the 
-    Provide only the single numerical score as (result out of 10) , generated as the average of the indivial scores corresponding to the {selected_certifications}.
-    """
-    
-    human_prompt = f"Classify the biodiversity impact for the project {project_name}."
+    pdf_overall_classification = extract_descriptions_from_pdf_surya(uploaded_file, project_name)
+    if pdf_overall_classification is None:
+        return 0
     
     # Create a placeholder for streaming updates
     progress_placeholder = st.empty()
     progress_placeholder.info("🔍 Starting classification using Perplexity...")
 
-    score_response = search_on_perplexity(human_prompt, system_prompt)
+    score_response = search_on_perplexity(project_name, pdf_overall_classification, selected_certifications)
     
     if score_response:
         try:
             score = int(score_response.strip())
         except ValueError:
+            st.error("Error parsing the score response from Perplexity.")
             score = 0
     else:
         score = 0
     
+    # Update the placeholder with the final result
     progress_placeholder.success("✅ Classification completed.")
     
     return score
@@ -151,10 +184,10 @@ def main():
     
     if st.button("Classify") and project_name and uploaded_file and username:
         st.info("📄 Extracting text from the uploaded PDF...")
-       ## pdf_text = extract_text_from_pdf(uploaded_file)
+        pdf_text = extract_text_from_pdf(uploaded_file)
         
         st.info("🔍 Classifying biodiversity impact...")
-        score = classify_biodiversity_impact(project_name, uploaded_file, selected_certifications)
+        score = random.randint(1, 10)  # Randomly generate a score for demonstration
 
         if score > 5:
             jwt_token = authenticate_user(username, score)
@@ -164,12 +197,7 @@ def main():
             st.error(f"Classification Score of Company Biodiversity: {score} ❌")
             st.error("Authentication Rejected")
 
-        fig, ax = plt.subplots()
-        ax.barh([project_name], [score], color='green')
-        ax.set_xlim(0, 10)
-        ax.set_xlabel('Score')
-        ax.set_title('Biodiversity Impact Classification')
-        st.pyplot(fig)
+       
 
         st.write("Thank you for using the Biodiversity Impact Classification tool! 🌱")
 

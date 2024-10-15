@@ -64,9 +64,58 @@ import {
 export const description =
   'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
 
+
+const products = [
+    {
+      name: "Eco-Friendly Solar Panels",
+      status: "Active",
+      price: "$299.99",
+      totalSales: 150,
+      createdAt: "2023-07-12 10:42 AM",
+      image: "/solar-panels.jpg",
+    },
+    {
+      name: "Organic Fertilizer",
+      status: "Active",
+      price: "$19.99",
+      totalSales: 300,
+      createdAt: "2023-08-18 03:21 PM",
+      image: "/organic-fertilizer.jpg",
+    },
+    {
+      name: "Rainwater Harvesting System",
+      status: "Active",
+      price: "$499.99",
+      totalSales: 75,
+      createdAt: "2023-09-29 08:15 AM",
+      image: "/rainwater-harvesting.jpg",
+    },
+    {
+      name: "Biodegradable Packaging",
+      status: "Active",
+      price: "$0.99",
+      totalSales: 1000,
+      createdAt: "2023-10-25 11:59 PM",
+      image: "/biodegradable-packaging.jpg",
+    },
+    {
+      name: "Electric Vehicle Charging Station",
+      status: "Active",
+      price: "$999.99",
+      totalSales: 50,
+      createdAt: "2023-11-01 12:00 AM",
+      image: "/ev-charging-station.jpg",
+    },
+  ];
+
+
+
+
+
 // @ts-ignore
 
 export default function Marketplace() {
+  
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -76,7 +125,7 @@ export default function Marketplace() {
             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
             <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">Kering</span>
           </Link>
           <TooltipProvider>
             <Tooltip>
@@ -114,10 +163,10 @@ export default function Marketplace() {
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Package className="h-5 w-5" />
-                  <span className="sr-only">Products</span>
+                  <span className="sr-only">Customers</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Products</TooltipContent>
+              <TooltipContent side="right">Customers</TooltipContent>
             </Tooltip>
           </TooltipProvider>
           <TooltipProvider>

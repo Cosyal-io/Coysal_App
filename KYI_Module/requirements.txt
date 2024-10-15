@@ -9,3 +9,4 @@ supabase
 surya-ocr
 supabase
 pyjwt
+transformers
