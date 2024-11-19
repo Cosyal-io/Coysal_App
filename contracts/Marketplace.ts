@@ -21,9 +21,6 @@ import { fetchURL, fetchJSONFileParameters } from 'src/utils/pinata_upload';
 import { supabaseClient } from 'src/utils/supabase_db';
 import { Database } from 'src/utils/database_types';
 
-
-
-
 export interface ImpactNFTGenerationProps {
   quantity: number;
   pdf_storage_reference: string;
@@ -46,10 +43,9 @@ export class NFTMarketplace {
   } 
 
   /**
-   * approves  innvestor wallets for the investments for the given NFT's
-   *   @param whitelistedAddress an array of addresses that are to be whitelisted by the admin for the offer creation.
+   * approves  investor wallets for the investments for the given NFT's
+   *   @param whitelistedAddress an array of addresses that are to be whitelisted by the admin for the   creation of buy offer.
    */
-
   async AddApproveWhitelistedAddress(
     whitelisted_address: string[],
     issuer_address: string,
@@ -94,8 +90,6 @@ export class NFTMarketplace {
       console.error('AddApproveWhitelistedAddress error ' + e);
     }
   }
-
-
   async generateNFTCerts(inputtParams: ImpactNFTGenerationProps) {
     try {
       const {
@@ -104,6 +98,7 @@ export class NFTMarketplace {
         corresponding_nfts,
         issuer,
       } = inputtParams;
+    
       // fetching the pdf uri from the pinata ipfs
       const pdf_uri_json = await fetchURL(pdf_storage_reference);
       const {
@@ -112,8 +107,7 @@ export class NFTMarketplace {
         participating_partners,
         percentage_split,
       } = await fetchJSONFileParameters(pdf_uri_json);
-
-     
+ 
 
       // now we are going to mint the nfts in the loop, passing the parameters
       for (let i = 0; i < quantity; i++) {
@@ -126,16 +120,15 @@ export class NFTMarketplace {
           Issuer: issuer,
           NFTokenTaxon: corresponding_nfts[i].nft_taxon,
           URI: pdf_uri,
-          TransferFee: 0,
-          
+          TransferFee: 0,          
         };
         const transaction: SubmittableTransaction =
           await this.Client.prepareTransaction(nftMintParams);
-        const signedTransaction = await this.Client.submitAndWait(transaction);
-        console.log('transaction has been submitted with the hash:' + (signedTransaction).result.hash + " and on block:" + (signedTransaction).result.ledger_index);
-        
-        console.log("now doing the payment to the partners that are registered to the given NFT project");
 
+
+        const signedTransaction = await this.Client.submitAndWait(transaction);
+        console.log('Transaction has been submitted with the hash: ' + (signedTransaction).result.hash + " and on block:" + (signedTransaction).result.ledger_index);
+        console.log("now doing the payment to the partners that are registered to the given NFT project");
       }
     } catch (e) {
       console.error('generateNFTCert error ' + e);

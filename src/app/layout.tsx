@@ -8,8 +8,8 @@ import { ThemeProvider } from 'src/app/themes';
 import { cn } from 's/lib/utils';
 import Footer from 'src/components/Footer';
 import { useRouter } from 'next/navigation';
-
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import HomePage from 'src/app/mainpage/page';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -22,10 +22,13 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
+
+
 // export const metadata: Metadata = {
 //   title: "Coysal App",
 //   description: "Platform for associating alternative impact for investors in developing communities",
 // };
+// by default if the / path is run, render the /mainpage 
 
 export default function RootLayout({
   children,
@@ -37,7 +40,7 @@ export default function RootLayout({
   useEffect(() => {
     // Check if the current path is the root
     if (window.location.pathname === '/') {
-      router.replace('/Client'); // Redirect to the mainpage
+      router.replace('/mainpage'); // Redirect to the mainpage
     }
   }, [router]);
 

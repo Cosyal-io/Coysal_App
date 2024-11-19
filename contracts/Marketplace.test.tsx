@@ -16,8 +16,6 @@ describe("Marketplace", () => {
     const client = new Client("wss://s.altnet.rippletest.net:51233");
 
 
-
-
     const generateWallets = async (count: number): Promise<Wallet[]> => {
       const wallets = [];
       for (let i = 0; i < count; i++) {
@@ -51,13 +49,7 @@ describe("Marketplace", () => {
         await client.disconnect();
       });
     
-    //   beforeEach(async () => {
-    //   });
-    
-    //     afterEach(async () => {
-    //       //  await client.disconnect();
-    //     });
-
+   
     it("should pass the PDF along with the wallet keys ", async () => {
         let project_name = "test_engie";
         // uploading the pdf file to the pinata

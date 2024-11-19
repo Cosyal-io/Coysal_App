@@ -6,4 +6,5 @@ module.exports = {
     '^src/(.*)$': '<rootDir>/src/$1',
     '^contracts/(.*)$': '<rootDir>/contracts/$1',
   },
+  testTimeout: 10000
 };

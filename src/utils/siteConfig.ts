@@ -8,6 +8,6 @@ export const siteConfig: SiteConfig = {
   ogImage: '',
   links: {
     twitter: '',
-    github: '',
+    github: 'https://github.com/Cosyal-io/Coysal_App/',
   },
 };

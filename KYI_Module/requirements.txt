@@ -1,5 +1,7 @@
 langchain
-PyPDF2 
+PyPDF
+langchain_openai
+langgraph 
 matplotlib
 langchain_community
 openai
@@ -10,3 +12,6 @@ surya-ocr
 supabase
 pyjwt
 transformers
+resend
+supabase
+uvicorn
