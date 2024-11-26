@@ -13,13 +13,10 @@ import {
   NFTBuyOffersRequest,
   NFTBuyOffersResponse,
   TrustSet,
-  TrustSetFlags,
 } from 'xrpl';
-
-
+import { createTestUsers } from "@/contracts/utils/fixturesSetupData";
 import { fetchURL, fetchJSONFileParameters } from 'src/utils/pinata_upload';
 import { supabaseClient } from 'src/utils/supabase_db';
-import { Database } from 'src/utils/database_types';
 
 export interface ImpactNFTGenerationProps {
   quantity: number;
@@ -31,12 +28,10 @@ export interface ImpactNFTGenerationProps {
   participants_address: string[];
 }
 
-
 export class NFTMarketplace {
   private admin_address: string;
   // also storing the bids of the given .
   private Client: Client;
-  
   constructor(admin_address: string, client: Client) {
     this.admin_address = admin_address;
     this.Client = client;
@@ -45,6 +40,9 @@ export class NFTMarketplace {
   /**
    * approves  investor wallets for the investments for the given NFT's
    *   @param whitelistedAddress an array of addresses that are to be whitelisted by the admin for the   creation of buy offer.
+   *  @param issuer_address the address of the admin who is approving the given addresses for the bidding.
+   * @param nft_id the id of the NFT that is being approved for the bidding address.
+   * 
    */
   async AddApproveWhitelistedAddress(
     whitelisted_address: string[],
@@ -90,6 +88,17 @@ export class NFTMarketplace {
       console.error('AddApproveWhitelistedAddress error ' + e);
     }
   }
+  /**
+   * 
+   * @param nft_id the id of the NFT whose approved buyers are to be fetched.
+   * @returns the list of all the approved whitelisted addresses for the given NFT
+   */
+
+  async getApprovedWhitelistedAddresses(nft_id: number): Promise<string[] | null> {  
+    return new Promise(async (resolve, reject) => {});
+  }
+
+
   async generateNFTCerts(inputtParams: ImpactNFTGenerationProps) {
     try {
       const {
@@ -134,6 +143,7 @@ export class NFTMarketplace {
       console.error('generateNFTCert error ' + e);
     }
   }
+  
   async getAllNFTCertsOfAccount(
     account_address: string
   ): Promise<AccountNFTsResponse | null> {

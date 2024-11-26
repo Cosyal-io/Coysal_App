@@ -2,10 +2,10 @@ import * as z from "zod";
 
 export const clientAuthSchema = z.object({
     email: z.string().email(),
-    personal_investor_pdf: z
-    .instanceof(FileList)
-    .refine((file) => file?.length == 1, 'File is required.'),
     username: z.string(),
+    personal_investor_pdf: z.instanceof(File).refine(file => file.type === "application/pdf" && file.size <= 50 * 1024 * 1024, {
+        message: "File must be a PDF and less than 50MB"
+    }),
     wallet_address: z.string()
 })
 

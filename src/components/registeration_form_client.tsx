@@ -55,7 +55,7 @@ async function onSubmit(
     // storing the email and wallet address in the table
     // storing the file.
     let userspace = supabaseClient.storage.createBucket(values.username)
-    const file = values.personal_investor_pdf?.[0]
+    const file = values.personal_investor_pdf
     let uploadfile = supabaseClient.storage.from((await userspace).data?.name!).upload(`${values.username}_kyi_file.pdf`, file)
     toast("KYI file is stored in bucket" + (await uploadfile).data?.id )
 

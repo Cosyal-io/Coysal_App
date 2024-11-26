@@ -58,7 +58,6 @@ const Home = () => {
           privateKeyProvider,
           web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
         });
-
         const authAdapter = new AuthAdapter({
           adapterSettings: {
             uxMode: UX_MODE.REDIRECT,
@@ -105,7 +104,6 @@ const Home = () => {
 
   const handleCreateNft = async () => {
     if (jsonResponse) {
-      // await CreateNft(jsonResponse.jsonData.name, jsonResponse.jsonData.uri);
     } else {
       toast.error('No JSON response available');
     }
@@ -125,9 +123,8 @@ const Home = () => {
         >
           Create New Nft
         </Button>
-        {jsonResponse && <p>{jsonResponse.jsonData.name}</p>}
       </main>
-      <Footer /> {/* Include Footer */}
+      <Footer /> 
     </div>
   );
 };

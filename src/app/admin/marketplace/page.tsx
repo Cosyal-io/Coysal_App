@@ -61,10 +61,11 @@ import {
   TooltipProvider,
 } from 's/components/ui/tooltip';
 
-export const description =
-  'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
+export const description = 'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
 
 
+
+// this is fetched via the /api/NFToffers call.
 const products = [
     {
       name: "Eco-Friendly Solar Panels",
@@ -106,11 +107,7 @@ const products = [
       createdAt: "2023-11-01 12:00 AM",
       image: "/ev-charging-station.jpg",
     },
-  ];
-
-
-
-
+];
 
 // @ts-ignore
 

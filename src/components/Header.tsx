@@ -8,6 +8,7 @@ import { Client } from 'xrpl';
 import  WalletLogin  from './xrpl_wallet_modal';
 
 // TODO: add the emoji: 🍃♻️🏞️💚🌱.
+
 const Header = () => {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false); // State to manage modal visibility
   return (
@@ -20,27 +21,27 @@ const Header = () => {
         <Menubar>
           <MenubarMenu>
                   <MenubarTrigger asChild>
-                    <Link href="/docs">
+                    <Link href="/docs/intro">
                     Docs
                     </Link>
                     </MenubarTrigger>   
           <MenubarTrigger>
                   <MenubarTrigger asChild>
-                    <Link href="/Client">
-                    Signup
+                    <Link href="/client/registeration">
+                    Signup/Login Client
                     </Link>
                     </MenubarTrigger>  
              </MenubarTrigger>
                   <MenubarTrigger asChild>
-                    <Link href="/client">
-                    Login
+                    <Link href="/client/">
+                    Signup/Login Admin
                     </Link>
                     </MenubarTrigger>  
           </MenubarMenu>
         </Menubar>
       </nav>
       <nav>
-      <WalletLogin/>
+      {/* <WalletLogin/> */}
         {/* <Button 
             onClick={() => setIsSignUpModalOpen(true)} 
             className="border border-black bg-black text-white hover:bg-gray-900 transition rounded-md px-3 py-1 text-sm"

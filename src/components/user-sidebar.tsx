@@ -1,5 +1,8 @@
+"use client"
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent,  SidebarMenu, SidebarMenuItem, SidebarMenuButton  } from "s/components/ui/sidebar"
- import { Home, Stamp } from "lucide-react"
+import { Home, Stamp } from "lucide-react"
+import {supabaseClient} from "src/utils/supabase_db"
+import { useEffect, useState } from "react"
 
 const client_items = [
     {
@@ -27,10 +30,10 @@ const admin_items = [
     icon: Stamp
 }
 ]
-
-
 export function SideBarApp() {
-    return (
+  const [items, setItems] = useState([])  
+  
+  return (
       <Sidebar>
         <SidebarContent>
           <SidebarGroup>
@@ -54,15 +57,3 @@ export function SideBarApp() {
       </Sidebar>
     )
   }
-
-
-
-
-
-
-
-
-
-
-
-
