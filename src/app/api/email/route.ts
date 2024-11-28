@@ -1,13 +1,19 @@
-import { NextApiHandler } from "next";
-
+import { NextApiRequest, NextApiResponse } from "next";
 import { Resend } from 'resend';
-import env  from "@/env";
-const resend = new Resend(env.schema.RESEND_URL);
 
-const handler: NextApiHandler = async (req, res) => {
+const resend = new Resend("");
+
+interface EmailRequestBody {
+    from: string;
+    to: string;
+    subject: string;
+    html: string;
+}
+
+export  async function POST(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            const { from,to, subject, html } = req.body;
+            const { from, to, subject, html } = req.body as EmailRequestBody;
 
             const email = await resend.emails.send({
                 from: from,
@@ -25,4 +31,3 @@ const handler: NextApiHandler = async (req, res) => {
     }
 };
 
-export default handler;

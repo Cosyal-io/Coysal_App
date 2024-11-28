@@ -14,3 +14,18 @@ export const adminAuthSchema = z.object({
     organisation_name: z.string(),
     wallet_address: z.string()
 })
+
+// SAML Auth Schema for SSO with AWS SAML 2.0 provider
+export const samlAuthSchema = z.object({
+    samlResponse: z.string(),
+    relayState: z.string().optional()
+})
+
+// OAuth validation schema
+export const oauthAuthSchema = z.object({
+    accessToken: z.string(),
+    refreshToken: z.string().optional(),
+    provider: z.enum(["google", "facebook", "github", "twitter"])
+})
+
+

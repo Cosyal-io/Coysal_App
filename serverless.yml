@@ -1,0 +1,7 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: cosyal
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: cosyal
+nextApp:
+  component: "@sls-next/serverless-component@1.18.0"
+

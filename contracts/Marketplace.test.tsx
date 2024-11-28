@@ -1,6 +1,7 @@
 import { Client, SubmittableTransaction, Wallet } from "xrpl";
 import { NFTMarketplace, ImpactNFTGenerationProps } from "./Marketplace";
 import {fetchURL, pinPDFile, pinJSONFile, JSONPDFile, fetchJSONFileParameters, pinata } from "src/utils/pinata_upload";
+import { createTestUsers } from "@/contracts/utils/fixturesSetupData";
 // todo: here i am simulating the wallets for the given recipients via the web3auth, but in reality this will be done by the actual wallets of the recipients.
 // import { CHAIN_NAMESPACES, CustomChainConfig, IProvider, UX_MODE, WALLET_ADAPTERS, WEB3AUTH_NETWORK } from "@web3auth/base";
 // import { XrplPrivateKeyProvider } from "@web3auth/xrpl-provider";
@@ -38,18 +39,19 @@ describe("Marketplace", () => {
 
   
     beforeAll(async () => {
-        await client.connect();
-        [adminWallet, ...clientWallets] = await generateWallets(4); // 1 admin + 3 clients + 
-        participantWallets = await generateWallets(5) //5 for the participants 
-        marketplace = new NFTMarketplace(adminWallet.address, client);
+      await client.connect();
+      [adminWallet, ...clientWallets] = await generateWallets(4); // 1 admin + 3 clients + 
+      participantWallets = await generateWallets(5) //5 for the participants 
+      marketplace = new NFTMarketplace(adminWallet.address, client);
 
-      });
-    
-      afterAll(async () => {
-        await client.disconnect();
-      });
-    
-   
+      // Create test users
+      await createTestUsers(10); // Create 10 test users
+    });
+  
+    afterAll(async () => {
+      await client.disconnect();
+    });
+ 
     it("should pass the PDF along with the wallet keys ", async () => {
         let project_name = "test_engie";
         // uploading the pdf file to the pinata

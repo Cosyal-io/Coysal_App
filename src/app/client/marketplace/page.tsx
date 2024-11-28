@@ -61,53 +61,53 @@ import {
   TooltipProvider,
 } from 's/components/ui/tooltip';
 
-export const description = 'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
+const description = 'An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions.';
 
 
 
-// this is fetched via the /api/NFToffers call.
-const products = [
-    {
-      name: "Eco-Friendly Solar Panels",
-      status: "Active",
-      price: "$299.99",
-      totalSales: 150,
-      createdAt: "2023-07-12 10:42 AM",
-      image: "/solar-panels.jpg",
-    },
-    {
-      name: "Organic Fertilizer",
-      status: "Active",
-      price: "$19.99",
-      totalSales: 300,
-      createdAt: "2023-08-18 03:21 PM",
-      image: "/organic-fertilizer.jpg",
-    },
-    {
-      name: "Rainwater Harvesting System",
-      status: "Active",
-      price: "$499.99",
-      totalSales: 75,
-      createdAt: "2023-09-29 08:15 AM",
-      image: "/rainwater-harvesting.jpg",
-    },
-    {
-      name: "Biodegradable Packaging",
-      status: "Active",
-      price: "$0.99",
-      totalSales: 1000,
-      createdAt: "2023-10-25 11:59 PM",
-      image: "/biodegradable-packaging.jpg",
-    },
-    {
-      name: "Electric Vehicle Charging Station",
-      status: "Active",
-      price: "$999.99",
-      totalSales: 50,
-      createdAt: "2023-11-01 12:00 AM",
-      image: "/ev-charging-station.jpg",
-    },
-];
+// // this is fetched via the /api/NFToffers call.
+// const products = [
+//     {
+//       name: "Eco-Friendly Solar Panels",
+//       status: "Active",
+//       price: "$299.99",
+//       totalSales: 150,
+//       createdAt: "2023-07-12 10:42 AM",
+//       image: "/solar-panels.jpg",
+//     },
+//     {
+//       name: "Organic Fertilizer",
+//       status: "Active",
+//       price: "$19.99",
+//       totalSales: 300,
+//       createdAt: "2023-08-18 03:21 PM",
+//       image: "/organic-fertilizer.jpg",
+//     },
+//     {
+//       name: "Rainwater Harvesting System",
+//       status: "Active",
+//       price: "$499.99",
+//       totalSales: 75,
+//       createdAt: "2023-09-29 08:15 AM",
+//       image: "/rainwater-harvesting.jpg",
+//     },
+//     {
+//       name: "Biodegradable Packaging",
+//       status: "Active",
+//       price: "$0.99",
+//       totalSales: 1000,
+//       createdAt: "2023-10-25 11:59 PM",
+//       image: "/biodegradable-packaging.jpg",
+//     },
+//     {
+//       name: "Electric Vehicle Charging Station",
+//       status: "Active",
+//       price: "$999.99",
+//       totalSales: 50,
+//       createdAt: "2023-11-01 12:00 AM",
+//       image: "/ev-charging-station.jpg",
+//     },
+// ];
 
 // @ts-ignore
 

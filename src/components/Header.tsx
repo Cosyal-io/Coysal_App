@@ -28,13 +28,13 @@ const Header = () => {
           <MenubarTrigger>
                   <MenubarTrigger asChild>
                     <Link href="/client/registeration">
-                    Signup/Login Client
+                    Registeration
                     </Link>
                     </MenubarTrigger>  
              </MenubarTrigger>
                   <MenubarTrigger asChild>
                     <Link href="/client/">
-                    Signup/Login Admin
+                    Login
                     </Link>
                     </MenubarTrigger>  
           </MenubarMenu>
