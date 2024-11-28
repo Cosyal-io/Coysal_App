@@ -31,13 +31,13 @@ export async function login(email: string, password: string) {
           throw new Error('Token not received from server');
         }
     
-        // Set the token as an HTTP-only cookie
-        await cookies().set('token', data.access_token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'strict',
-          maxAge: 3600, // 1 hour
-        });
+        // // Set the token as an HTTP-only cookie
+        // await cookies().set('token', data.access_token, {
+        //   httpOnly: true,
+        //   secure: process.env.NODE_ENV === 'production',
+        //   sameSite: 'strict',
+        //   maxAge: 3600, // 1 hour
+        // });
     
         // Decode the JWT to get user information
         const decodedToken = jwtDecode<User>(data.access_token);
@@ -56,29 +56,28 @@ export async function login(email: string, password: string) {
           throw new Error('An unexpected error occurred');
         }
       }
-    }
     
-    export async function logout() {
-      cookies().delete('token');
-    }
     
-    export async function checkAuth() {
-      const token = cookies().get('token')?.value;
+    // export async function logout() {
+    //   cookies().delete('token');
+    // }
     
-      if (!token) {
-        throw new Error('Not authenticated');
-      }
+    // export async function checkAuth() {
+    //   const token = cookies().get('token')?.value;
     
-      try {
-        const decodedToken = jwtDecode<User>(token);
-        return {
-          id: decodedToken.id,
-          email: decodedToken.email,
-          roles: decodedToken.roles,
-        };
-      } catch (error) {
-        throw new Error('Invalid token');
-      }
+    //   if (!token) {
+    //     throw new Error('Not authenticated');
+    //   }
+    
+    //   try {
+    //     const decodedToken = jwtDecode<User>(token);
+    //     return {
+    //       id: decodedToken.id,
+    //       email: decodedToken.email,
+    //       roles: decodedToken.roles,
+    //     };
+    //   } catch (error) {
+    //     throw new Error('Invalid token');
+    //   }
+  }
 
-
-}
