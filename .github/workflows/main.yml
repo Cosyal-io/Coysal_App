@@ -15,8 +15,8 @@ jobs:
           - uses: actions/setup-node@v1
             with:
               node-version: '12.x'
-          - name: Install NPM dependencies
-            run: npm install
+          - name: Install  dependencies using pnpm (resolving lockfile and deps)
+            run: pnpm install
           - name: Configure AWS Credentials
             uses: aws-actions/configure-aws-credentials@v1
             with:
