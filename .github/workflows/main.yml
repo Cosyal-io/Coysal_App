@@ -37,6 +37,8 @@ jobs:
       - name: Serverless Framework Login
         uses: serverless/github-action@v3.2
         with:
-          args: config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          run: |
+            serverless login
+            serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
       - name: Deploy Next.js app
         run: npx serverless
