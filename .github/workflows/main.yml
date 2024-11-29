@@ -40,4 +40,15 @@ jobs:
           run: |
             serverless login
             serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
-            npx serverless
+            npx serverless deploy
+
+      - name: Get Deployment URL from AWS Amplify
+        run: |
+          APP_ID=$(aws amplify list-apps --query 'apps[0].appId' --output text)
+          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+          DEPLOYMENT_URL=$(aws amplify list-branches --app-id $APP_ID --query "branches[?branchName=='$BRANCH_NAME'].{url:defaultDomain}" --output text)
+          echo "Deployment URL: $DEPLOYMENT_URL"
+          echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $GITHUB_ENV
+
+      - name: Share Deployment URL
+        run: echo "The deployment URL is ${{ env.DEPLOYMENT_URL }}"
