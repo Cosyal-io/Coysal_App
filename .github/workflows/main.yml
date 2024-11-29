@@ -42,11 +42,22 @@ jobs:
             serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
             npx serverless deploy
 
+      - name: Check and Create Amplify App
+        run: |
+          APP_NAME="cosyal"
+          APP_ID=$(aws amplify list-apps --query "apps[?name=='$APP_NAME'].appId" --output text)
+          if [ -z "$APP_ID" ]; then
+            echo "Creating Amplify app named $APP_NAME"
+            APP_ID=$(aws amplify create-app --name $APP_NAME --query 'app.appId' --output text)
+          else
+            echo "Using existing Amplify app named $APP_NAME"
+          fi
+          echo "APP_ID=$APP_ID" >> $GITHUB_ENV
+
       - name: Get Deployment URL from AWS Amplify
         run: |
-          APP_ID=$(aws amplify list-apps --query 'apps[0].appId' --output text)
           BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-          DEPLOYMENT_URL=$(aws amplify list-branches --app-id $APP_ID --query "branches[?branchName=='$BRANCH_NAME'].{url:defaultDomain}" --output text)
+          DEPLOYMENT_URL=$(aws amplify list-branches --app-id ${{ env.APP_ID }} --query "branches[?branchName=='$BRANCH_NAME'].{url:defaultDomain}" --output text)
           echo "Deployment URL: $DEPLOYMENT_URL"
           echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $GITHUB_ENV
 
