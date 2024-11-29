@@ -40,5 +40,4 @@ jobs:
           run: |
             serverless login
             serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
-      - name: Deploy Next.js app
-        run: npx serverless
+            npx serverless
