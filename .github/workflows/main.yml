@@ -30,10 +30,13 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - name: Serverless Framework Login
-        run: serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
+        uses: serverless/github-action@v3.2
+        with:
+          args: config credentials --provider aws --key ${{ secrets.SERVERLESS_ACCESS_KEY }}
       - name: Deploy Next.js app
         run: npx serverless

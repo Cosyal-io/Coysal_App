@@ -11,8 +11,17 @@ export const env = createEnv({
 
     },
 
+    server: {
+        PALISADE_CLIENT_ID: z.string(),
+        PALISADE_CLIENT_SECRET: z.string()
+
+    },
+
+
     runtimeEnv: {
         NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+        PALISADE_CLIENT_ID: process.env.PALISADE_CLIENT_ID,
+        PALISADE_CLIENT_SECRET: process.env.PALISADE_CLIENT_SECRET
     },
 
 });

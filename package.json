@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "test": "jest --config jest.config.js"
+    "test": "jest --config jest.config.js",
+    "test:palisade": "tsc contracts/palisade-test.tsx"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -29,6 +30,7 @@
     "@web3auth/base": "^9.0.2",
     "@web3auth/no-modal": "^9.1.0",
     "@web3auth/xrpl-provider": "^9.0.2",
+    "axios": "^1.7.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "commander": "^12.1.0",
@@ -56,6 +58,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
     "@supabase/supabase-js": "^2.45.4",
     "@types/jest": "^29.5.13",
     "@types/node": "^20",
