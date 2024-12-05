@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@clerk/elements": "^0.20.1",
     "@clerk/nextjs": "^6.5.0",
     "@clerk/themes": "^2.1.48",
     "@repo/tailwind-config": "workspace:*",

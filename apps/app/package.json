@@ -9,9 +9,10 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@clerk/elements": "^0.20.1",
     "@prisma/client": "6.0.0",
-    "@repo/auth": "workspace:*",
     "@repo/analytics": "workspace:*",
+    "@repo/auth": "workspace:*",
     "@repo/collaboration": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/design-system": "workspace:*",
